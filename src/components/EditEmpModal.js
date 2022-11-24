@@ -3,7 +3,7 @@ import {Modal,Button,Row,Col,Form,FormGroup} from 'react-bootstrap';
 import Snackbar  from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 
-export  class AddEmpModal extends Component {
+export  class EditEmpModal extends Component {
 
 
     constructor(props){
@@ -37,13 +37,13 @@ export  class AddEmpModal extends Component {
         
         fetch('http://localhost:51331/api/employee',
         {
-            method:'POST',
+            method:'PUT',
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify({
-                EmployeeID:null,
+                EmployeeID:e.target.EmployeeID.value,
                 EmployeeName:e.target.EmployeeName.value,
                 Department:e.target.Department.value,
                 MailID:e.target.MailID.value
@@ -102,6 +102,20 @@ export  class AddEmpModal extends Component {
                     <Row>
                         <Col sm={6}>
                             <Form onSubmit={this.handleSubmit}>
+                            <FormGroup controlid='EmployeeID'>
+                                    <Form.Label>
+                                        EmployeeID
+                                    </Form.Label>
+                                    <Form.Control
+                                    type='text'
+                                    name='EmployeeID'
+                                    disabled
+                                    defaultValue={this.props.empid}
+                                    placeholder='EmployeeID'                           
+                                    />
+    
+                                </FormGroup>
+
                                 <FormGroup controlid='EmployeeName'>
                                     <Form.Label>
                                         EmployeeName
@@ -110,7 +124,8 @@ export  class AddEmpModal extends Component {
                                     type='text'
                                     name='EmployeeName'
                                     required
-                                    placeholder='EmployeeName'                           
+                                    placeholder='EmployeeName' 
+                                    defaultValue={this.props.empName}                          
                                     />
     
                                 </FormGroup>
@@ -118,7 +133,7 @@ export  class AddEmpModal extends Component {
                                     <Form.Label>
                                         Department
                                     </Form.Label>
-                                   <Form.Control as="select" 
+                                   <Form.Control as="select" defaultValue={this.props.depmt}
                                     type='text'
                                     name='Department'
                                     required
@@ -140,7 +155,8 @@ export  class AddEmpModal extends Component {
                                     type='text'
                                     name='MailID'
                                     required
-                                    placeholder='MailID'                           
+                                    placeholder='MailID' 
+                                    defaultValue={this.props.mailid}                          
                                     />
     
                                 </FormGroup>
@@ -153,7 +169,8 @@ export  class AddEmpModal extends Component {
                                     type='date'
                                     name='DOJ'
                                     required
-                                    placeholder='DOJ'                           
+                                    placeholder='DOJ'
+                                    defaultValue={this.props.doj}                           
                                     />
     
                                 </FormGroup>
@@ -163,7 +180,7 @@ export  class AddEmpModal extends Component {
 
                                 <FormGroup>
                                     <Button variant='primary' type='submit'>
-                                    Add
+                                    Update
                                     </Button> 
                                 </FormGroup>
 

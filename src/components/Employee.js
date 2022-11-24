@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import { AddEmpModal } from './AddEmpModal';
 import {Button,ButtonToolbar} from 'react-bootstrap';
-import { EditDepModal } from './EditDepModal';
+import { EditEmpModal } from './EditEmpModal';
 
 export  class Employee extends Component {
   constructor(props)
@@ -61,7 +61,7 @@ export  class Employee extends Component {
 
   
     render() {
-     const{emps,empid,empname}=this.state;
+     const{emps,empid,empname,depmt,mailid,doj}=this.state;
      let addModalClose = () => this.setState({addModalShow:false})
      let editModalClose = () => this.setState({editModalShow:false})
       return (
@@ -93,7 +93,10 @@ export  class Employee extends Component {
                   <Button onClick={() => this.setState({
                     editModalShow:true,
                     empid:emp.EmployeeID,
-                    empname:emp.EmployeeName
+                    empname:emp.EmployeeName,
+                    depmt:emp.Department,
+                    mailid:emp.MailID,
+                    doj:emp.Column1
 
                   })}>
                     Edit
@@ -103,11 +106,14 @@ export  class Employee extends Component {
                   >
                     Delete
                   </Button>
-                  <EditDepModal 
+                  <EditEmpModal 
                   show={this.state.editModalShow}
                   onHide={editModalClose}
                   empid={empid}
                   empName={empname}
+                  depmt={depmt}
+                  mailid={mailid}
+                  doj={doj}
                   
                   />
                 </ButtonToolbar>
